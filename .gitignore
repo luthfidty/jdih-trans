@@ -1,0 +1,13 @@
+node_modules/
+vendor/
+uploads/
+*.zip
+*.sql
+# Folder tambahan untuk JDIH/PHP
+writable/
+__MACOSX/
+.env
+.phpunit.result.cache
+public/uploads/
+writable/
+vendor/
