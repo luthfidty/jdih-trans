@@ -1,0 +1,123 @@
+<!-- page title -->
+<header id="page-header">
+    <h1><?php echo ucfirst($this->uri->segment(2)) ?></h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?php echo base_url($this->uri->segment(1)) ?>">Beranda</a></li>
+        <li class="breadcrumb-item active"><?php echo ucfirst($this->uri->segment(2)) ?></li>
+    </ol>
+</header>
+<!-- /page title -->
+
+
+<div id="content" class="padding-20">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-lg-12">
+                    Detil Dokumen - <?php echo $title; ?>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class = "table table-responsive">
+                <table class = "table table-bordered table-responsive" >
+                    <tr><td>Judul</td><td><?php echo $title; ?></td></tr>
+                    <tr><td>Tipe Dokumen</td><td><?php echo $documenttype; ?></td></tr>
+                    <tr><td>Kategori / Jenis Dokumen</td><td><?php echo $documentcategory; ?></td></tr>
+                    <tr><td>Tajuk Entri Utama</td><td><?php echo $teu; ?></td></tr>
+                    <tr><td>Nomor Peraturan</td><td><?php echo $regulationnumber; ?></td></tr>
+                    <tr><td>Tahun</td><td><?php echo $year; ?></td></tr>
+                    <tr><td>Tempat Penetapan</td><td><?php echo $assignmentplace; ?></td></tr>
+                    <tr><td>Tanggal Penetapan</td><td><?php echo $assignmentdate; ?></td></tr>
+                    <tr><td>Tanggal Pengundangan</td><td><?php echo $approvaldate; ?></td></tr>
+                    <tr><td>Tanggal Berlaku Efektif</td><td><?php echo $effectivedate; ?></td></tr>
+                    <tr><td>Lokasi</td><td><?php echo $location; ?></td></tr>
+                    <tr><td>Sumber</td><td><?php echo $source; ?></td></tr>
+                    <tr><td>Bahasa</td><td><?php echo $language; ?></td></tr>
+                    <tr><td>Bidang Hukum</td><td><?php echo $legalfield; ?></td></tr>
+                    <tr><td>Subjek</td><td><?php echo $subject; ?></td></tr>
+                    <tr><td>Klaster</td><td><?php echo $cluster; ?></td></tr>
+                    <tr><td>Status</td><td><?php echo $status; ?></td></tr>
+                    <tr><td>Detail Staus</td><td><?php echo $detailstatus; ?></td></tr>
+                    <tr><td>Dikunjungi</td><td><?php echo $viewed; ?></td></tr>
+                    <tr><td>Diunduh</td><td><?php echo $downloaded; ?></td></tr>
+                    <tr><td>Abstrak</td><td><?php echo $abstract; ?></td></tr>
+                    <tr><td>Abstrak Dokumen</td><td>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".abstractfile">Abstrak Dokumen</button>
+                            <div class="modal fade abstractfile" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myLargeModalLabel">Abstrak Dokumen - <?php echo $title ?></h4>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <?php
+                                            if ($abstractfile->fullpath) {
+                                                echo '<embed src="' . site_url($abstractfile->fullpath) . '" frameborder="0" width="100%" height="600px">';
+                                            } else {
+                                                echo '<div class="alert alert-danger margin-bottom-30"><!-- DANGER -->
+	<strong>ERROR</strong>File tidak ditemukan!.
+</div>';
+                                            }
+                                            ?>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </td></tr>
+                    <tr><td>Lampiran Dokumen</td><td>
+                            <button type = "button" class = "btn btn-primary" data-toggle = "modal" data-target = ".attachment">Dokumen</button>
+                            <div class = "modal fade attachment" tabindex = "-1" role = "dialog" aria-labelledby = "myLargeModalLabel" aria-hidden = "true">
+                                <div class = "modal-dialog modal-lg">
+                                    <div class = "modal-content">
+                                        <div class = "modal-header">
+                                            <button type = "button" class = "close" data-dismiss = "modal" aria-label = "Close"><span aria-hidden = "true">&times;
+                                                </span></button>
+                                            <h4 class = "modal-title" id = "myLargeModalLabel">Dokumen - <?php echo $title
+                                            ?></h4>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <embed src="<?php echo site_url($attachment->fullpath) ?>" frameborder="0" width="100%" height="600px">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </td></tr>
+                    <tr><td>Status Publikasi</td><td><?php echo $published; ?></td></tr>
+                    <tr><td>Dipublikasi Pada</td><td><?php echo $publishdate; ?></td></tr>
+                    <tr><td>Alasan</td><td><?php echo $reason; ?></td></tr>
+                    <tr><td>Dibuat Pada</td><td><?php echo $createdat; ?></td></tr>
+                    <tr><td>Dibuat Oleh</td><td><?php echo $fullname ? $fullname : $username ?></td></tr>
+                    <tr><td>Diperbaharui Pada</td><td><?php echo $updatedat; ?></td></tr>
+                    <tr><td>Diperbaharui Oleh</td><td><?php echo $fullnameupdate ? $fullnameupdate : $userupdate; ?></td></tr>
+
+
+                </table>
+            </div>
+
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-md-6 col-sm-12 fa-">
+                    <a href="<?php echo site_url('app/regulations') ?>" class="btn btn-default">Kembali</a>
+                    <?php
+                    if ($published == 'Pending') {
+                        if ($session['id'] == 1 || $session['id'] == $this->config->item('approval_user')) {
+                            echo $this->myacl->_btnDefault(site_url('app/regulations/approve/' . $id), "Publis Dokumen", "btn-aqua", "fa-paper-plane");
+                        }
+                        if ($session['id'] == 1 || $session['id'] == $this->config->item('approval_user')) {
+                            echo $this->myacl->_btnDefault(site_url('app/regulations/reject/' . $id), "Tolak Dokumen", "btn-teal", "fa-ban");
+                        }
+                    }
+                    ?>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

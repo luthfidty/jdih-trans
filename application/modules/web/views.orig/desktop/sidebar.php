@@ -1,0 +1,142 @@
+<div class="col-lg-4 col-md-5 col-sm-12">
+
+    <nav class="nav-deep nav-deep-light mb-2">
+
+        <!-- mobile only -->
+        <button class="clearfix btn btn-toggle btn-sm w-100 text-align-left shadow-md border rounded mb-1 d-block d-lg-none" data-bs-target="#sidebar_expand_mobile_post" data-toggle-container-class="d-none d-sm-block bg-white shadow-md border animate-fadein rounded p-3">
+            <span class = "group-icon px-2 py-2 float-start">
+                <i class = "fi fi-bars-2"></i>
+                <i class = "fi fi-close"></i>
+            </span>
+
+            <span class = "h5 py-2 m-0 float-start">
+                Pojok Unit Kerja
+            </span>
+        </button>
+
+        <!--desktop only-->
+        <h2 class="h5 m-3 d-none d-lg-block">
+            <span class="text-danger fw-medium">Pojok</span> Unit Kerja
+        </h2>
+
+
+        <div id="sidebar_expand_mobile_post" class="d-none d-lg-block">
+            <div class="card-body p-0 m-">
+                <?php
+                if ($pojokuke) {
+                    foreach ($pojokuke as $post) {
+                        ?>
+                        <div class="card border-0 shadow m-1">
+                            <div class="card-body">
+                                <div class="d-flex text-decoration-none">
+
+                                    <!-- image -->
+                                    <div style="width:100px;height:100px" class="text-center bg-light rounded bg-cover lazy" data-background-image="<?php echo $post->postimage ? ($post->postimagethumb ? site_url($post->postimagethumb) : site_url($post->postimage)) : site_url("assets/web/desktop/images/defaultimgthumb.png") ?>"></div>
+
+                                    <div class="col px-3">
+
+
+                                        <a href="<?php echo site_url('web/posts/read/' . $post->slug) ?>" class="text-primary-emphasis text-dark-hover">
+                                            <p style="text-align: justify"><?php echo $post->title ?></p>
+                                        </a>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
+                <!--/RECOMMENDED-->
+
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- CATEGORIES -->
+    <nav class="nav-deep nav-deep-light mb-2">
+
+        <!-- mobile only -->
+        <button class="clearfix btn btn-toggle btn-sm w-100 text-align-left shadow-md border rounded mb-1 d-block d-lg-none" data-bs-target="#sidebar_expand_mobile_post" data-toggle-container-class="d-none d-sm-block bg-white shadow-md border animate-fadein rounded p-3">
+            <span class = "group-icon px-2 py-2 float-start">
+                <i class = "fi fi-bars-2"></i>
+                <i class = "fi fi-close"></i>
+            </span>
+
+            <span class = "h5 py-2 m-0 float-start">
+                Kategori Dokumen
+            </span>
+        </button>
+
+        <!--desktop only-->
+        <h2 class="h5 m-3 d-none d-lg-block">
+            <span class="text-danger fw-medium">Kategori</span> Dokumen
+        </h2>
+        <div class="card-body p-0 m-0">
+            <div class="card border-0 shadow m-1">
+                <!--navbar : navigation-->
+                <ul id = "nav_responsive_cdoc" class = "nav flex-column d-none d-lg-block">
+
+
+                    <?php
+                    if ($documentcategory) {
+                        foreach ($documentcategory as $dc) {
+                            ?>
+                            <li class="nav-item active mx-1">
+                                <a class="nav-link px-0" href="<?php echo site_url('web/documents/category/' . $dc->acslug) ?>">
+                                    <i class="fi fi-arrow-end-full smaller"></i>
+                                    <span class="px-2 d-inline-block text-primary-emphasis fs-6 fw-lighter link-dark">
+                                        <?php echo $dc->acronym ?> <span class='badge bg-gradient-warning text-dark-emphasis'><?php echo $dc->countdc ?></span>
+                                    </span>
+                                </a>
+                            </li>
+                            <?php
+                        }
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="nav-deep nav-deep-light mb-2">
+
+        <!-- mobile only -->
+        <button class="clearfix btn btn-toggle btn-sm w-100 text-align-left shadow-md border rounded mb-1 d-block d-lg-none" data-bs-target="#sidebar_expand_mobile_post" data-toggle-container-class="d-none d-sm-block bg-white shadow-md border animate-fadein rounded p-3">
+            <span class = "group-icon px-2 py-2 float-start">
+                <i class = "fi fi-bars-2"></i>
+                <i class = "fi fi-close"></i>
+            </span>
+
+            <span class = "h5 py-2 m-0 float-start">
+                Dokumen Terpopuler
+            </span>
+        </button>
+
+        <!--desktop only-->
+        <h2 class="h5 m-3 d-none d-lg-block">
+            <span class="text-danger fw-medium">Dokumen</span> Terpopuler
+        </h2>
+
+        <!--navbar : navigation-->
+        <ul id = "nav_document_populer" class = "nav flex-column d-none d-lg-block">
+
+            <?php
+            if ($mostvdocuments) {
+                foreach ($mostvdocuments as $mostv) {
+                    echo '
+            <li class="list-item border-bottom py-1">
+                <a class="text-primary-emphasis link-dark fw-light fs-6" href="' . site_url('web/documents/read/' . $mostv->slug) . '"><p style="text-align: justify"> <i class="fi fi-arrow-end-full smaller"></i> ' . $mostv->title . '</p></a>
+            </li>';
+                }
+            }
+            ?>
+        </ul>
+
+    </nav>
+    <!-- /CATEGORIES -->
+</div>

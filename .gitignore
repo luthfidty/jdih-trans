@@ -11,3 +11,8 @@ __MACOSX/
 public/uploads/
 writable/
 vendor/
+public/documents/
+*.pdf
+*.sql
+*.doc
+*.docx

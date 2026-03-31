@@ -1,0 +1,105 @@
+<div class="container ">
+    <div class="row text-white text-center py-5 mb-4"
+        style='background:url("https://jdih.kemendesa.go.id/assets/app/images/bglogin.jpg") no-repeat center center'>
+        <h1 class="h2">
+            Berita
+        </h1>
+
+        <div class="justify-content-center" style="display: inherit;">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb small">
+                    <li class="breadcrumb-item"><a class="text-white" href="<?php echo site_url() ?>">Beranda</a></li>
+                    <li class="breadcrumb-item"><a class="text-white"
+                            href="<?php echo site_url('web/posts/') ?>">Artikel</a>
+                    </li>
+                    <?php if ($currentdoccategory) { ?>
+                                    <li class="breadcrumb-item"><a class="bg-gray-300"
+                                            href="<?php echo site_url('web/posts/category/' . $currentdoccategory->slug) ?>">
+                                            <?php echo $currentdoccategory->category ?>
+                                        </a></li>
+                                <?php } ?>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row g-xl-5">
+        <div class="col-lg-8 col-md-7 col-sm-12">
+            <!-- posts -->
+            <?php if ($posts) { ?>
+                <div class="row">
+                    <div class="mb-4">
+                        <h1 class="h3 mb-0 text-primary-emphasis link-dark">
+                            <?php echo $posts->title ?>
+
+                        </h1>
+                        <span class="badge bg-gray-700"><i class="fi fi-calendar text-white"></i>
+                            <?php echo date_format(date_create($posts->createdat), "d-m-Y") ?>
+                        </span>
+                        <span class="badge bg-gray-700"><i class="fi fi-user-male text-white"></i>
+                            <?php echo $posts->fullname ? $posts->fullname : $posts->username ?>
+                        </span>
+                        <figure class="d-block text-center rounded overflow-hidden mb-5">
+                            <?php if ($posts->postimage) {
+                                ?>
+                                <img class="img-fluid rounded"
+                                    src="<?php echo $posts->postimage ? site_url($posts->postimage) : site_url("assets/web/images/defaultimgthumb.png") ?>"
+                                    alt="<?php echo $posts->title ?>">
+                            <?php } ?>
+                        </figure>
+                        <div id='postbody' class="article-format text-primary-emphasis "
+                            style="text-align: justify !important;">
+                            <?php echo str_replace('[removed]', '', $posts->content) ?>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!--                        <div class="border-top-1 small">
+
+                                                </div>-->
+                    <hr />
+                    <div class="post-footer d-md-flex flex-md-row justify-content-md-between align-items-center mt-3">
+                        <div class="mb-0 ">
+                            <div class="dropdown share-dropdown btn-group">
+                                <button class="btn btn-sm bg-gradient-info  dropdown-toggle mb-0 me-0"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fi fi-share"></i> Share </button>
+                                    <div class="dropdown-menu">
+                                    <a class="dropdown-item" target="_blank" href="https://twitter.com/intent/tweet?text=Baca <?php echo $pages->title. " - ".$this->config->item('site_name')?>&url=<?php site_url('pages/read/'.$pages->slug) ?>"><i class="uil uil-twitter"></i>Twitter</a>
+                                    <a class="dropdown-item" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo site_url('pages/read/'.$pages->slug) ?>"><i class="uil uil-facebook-f"></i>Facebook</a>
+                                    <a class="dropdown-item" target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo site_url('pages/read/'.$pages->slug) ?>&title=Baca <?php echo $pages->title. " - ".$this->config->item('site_name')?>"><i class="uil uil-linkedin"></i>Linkedin</a>
+                                </div>
+                                <!--/.dropdown-menu -->
+                                <button id='btnlike' onclick="postlike(<?php echo $posts->id ?>, 'post')"
+                                    class="btn btn-sm bg-primary-soft  btn-icon btn-icon-start"><i class="fi fi-like"></i>
+                                    <span id='countliked' class="badge bg-gradient-warning text-indigo-900">
+                                        <?php echo $posts->liked ?>
+                                    </span> Suka</button>
+                                    
+                                <span class="btn btn-sm  bg-success-soft text-indigo-900" style="cursor: default !important;"><span
+                                        class="badge bg-gradient-warning text-indigo-900">
+                                        <?php echo $posts->viewed ?>
+                                    </span> Dilihat</span>
+                            </div>
+
+                            <!--/.share-dropdown -->
+                        </div>
+                    </div>
+                </div>
+                <!-- /posts -->
+            <?php } else { ?>
+                <div class="col-12 col-md-12">
+                    <div class="px-2 pt-3">
+                        <div class="alert alert-danger  fade show" role="alert">
+                            Tidak dapat menemukan artikel
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+        </div>
+        <?php $this->load->view('sidebar') ?>
+    </div>
+
+</div>
+<!-- end :: blog content -->

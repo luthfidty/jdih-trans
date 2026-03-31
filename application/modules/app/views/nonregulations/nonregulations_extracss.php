@@ -1,0 +1,1 @@
+<link href="<?php echo base_url() ?>assets/app/plugins/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">

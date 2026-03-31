@@ -1,0 +1,139 @@
+<!-- page title -->
+
+<header id="page-header">
+
+    <h1>Beranda</h1>
+</header>
+
+<div id="content" class=" dashboard padding-20">
+    <?php if ($this->session->userdata('message') <> '') { ?>
+        <div class="alert alert-info  text-center" role="alert">
+            <strong>
+                <?php echo $this->session->userdata('message') ?>.
+            </strong>
+        </div>
+
+    <?php } 
+        if($this->sess['rolename']=='Administrator') { ?>
+    <!-- /BOXES -->
+    <div class="row">
+        
+        <!-- Feedback Box -->
+        <div class="col-md-3 col-sm-6 col-xs-6">
+            <!-- BOX -->
+            <div class="box bg-teal"><!-- default, danger, warning, info, success -->
+                <div class="box-title"><!-- add .noborder class if box-body is removed -->
+                    <h4><a href="#">
+                            <?php echo $pendDoc ?> Dokumen Peraturan
+                        </a></h4>
+                    <small class="block">Perlu Disetujui</small>
+                    <i class="hidden-xs text-white fa fa-file"></i>
+                </div>
+                <div class="box-body text-center">
+                    <a class="btn btn-white btn-mini" href="<?php echo site_url('app/regulations/pending') ?>">Lihat
+                        Detil</a>
+                </div>
+            </div>
+            <!-- /BOX -->
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-6">
+            <!-- BOX -->
+            <div class="box bg-blue"><!-- default, danger, warning, info, success -->
+
+                <div class="box-title"><!-- add .noborder class if box-body is removed -->
+                    <h4><a href="#">
+                            <?php echo $pendNon ?> Non Peraturan
+                        </a></h4>
+                    <small class="block">Perlu Disetujui</small>
+                    <i class="hidden-xs text-white fa fa-file"></i>
+                </div>
+                <div class="box-body text-center">
+                    <a class="btn btn-white btn-mini" href="<?php echo site_url('app/nonregulations/pending') ?>">Lihat
+                        Detil</a>
+                </div>
+            </div>
+            <!-- /BOX -->
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-6">
+            <!-- BOX -->
+            <div class="box bg-navy"><!-- default, danger, warning, info, success -->
+
+                <div class="box-title"><!-- add .noborder class if box-body is removed -->
+                    <h4><a href="#">
+                            <?php echo $pendPost ?> Artikel
+                        </a></h4>
+                    <small class="block">Perlu Disetujui</small>
+                    <i class="hidden-xs text-white fa fa-paper-plane"></i>
+                </div>
+                <div class="box-body text-center">
+                    <a class="btn btn-white btn-mini" href="<?php echo site_url('app/posts/pending') ?>">Lihat
+                        Detil</a>
+                </div>
+            </div>
+            <!-- /BOX -->
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-6">
+            <!-- BOX -->
+            <div class="box bg-olive"><!-- default, danger, warning, info, success -->
+
+                <div class="box-title"><!-- add .noborder class if box-body is removed -->
+                    <h4><a href="#">
+                            <?php echo $pendGal ?> Galeri
+                        </a></h4>
+                    <small class="block">Perlu Disetujui</small>
+                    <i class="hidden-xs text-white fa fa-images"></i>
+                </div>
+                <div class="box-body text-center">
+                    <a class="btn btn-white btn-mini" href="<?php echo site_url('app/galleries/pending') ?>">Lihat
+                        Detil</a>
+                </div>
+            </div>
+            <!-- /BOX -->
+        </div>
+    </div>
+    <!-- /BOXES -->
+    <?php }
+    ?>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="panel border-aqua btn-aqua">
+                <div class="panel-heading">
+                    <h4>Dokumen Peraturan Pertahun</h4>
+                </div>
+                <div class="panel-body">
+                    <canvas class="chartjs fullwidth height-300" id="barNumDocsYears" width="547"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="panel border-aqua btn-blue">
+                <div class="panel-heading ">
+                    <h4>Dokumen Peraturan Perkategori</h4>
+                </div>
+                <div class="panel-body">
+                    <canvas class="chartjs fullwidth height-300" id="barNumDocsCat" width="547"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="panel border-aqua btn-amber">
+                <div class="panel-heading ">
+                    <h4>Survey Kepuasan Layanan</h4>
+                </div>
+                <div class="panel-body">
+                    <div id="graph-donut"><!-- GRAPH CONTAINER --></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="panel border-aqua btn-green">
+                <div class="panel-heading ">
+                    <h4>Grafik Pengunjung harian</h4>
+                </div>
+                <div class="panel-body">
+                    <div id="graph-non-date"><!-- GRAPH CONTAINER --></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

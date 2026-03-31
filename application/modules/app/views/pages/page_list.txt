@@ -1,0 +1,110 @@
+<!-- page title -->
+<header id="page-header">
+    <h1><?php echo ucfirst($this->uri->segment(2)) ?></h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?php echo base_url($this->uri->segment(1)) ?>">Beranda</a></li>
+        <li class="breadcrumb-item active"><?php echo ucfirst($this->uri->segment(2)) ?></li>
+    </ol>
+</header>
+<!-- /page title -->
+
+
+<div id="content" class="padding-20">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-lg-6 col-md-46 col-md-12">
+                    <?php
+                    echo $this->myacl->_btnDefault(site_url('app/pages'), "Daftar Halaman", "btn-aqua", "fa-list");
+                    if (in_array('create', $rolelist)) {
+                        echo $this->myacl->_btnCreate(site_url('app/pages/create'), "Tambah");
+                    }
+                    if (in_array('create', $rolelist)) {
+                        echo $this->myacl->_btnDefault(site_url('app/pages/trash'), "Tong Sampah", "btn-teal", "fa-trash");
+                    }
+                    ?>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 text-center">
+                    <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 text-right hidden-sm hidden-xs">
+                    <form action="<?php echo site_url('app/pages/index'); ?>" class="form-inline" method="get">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
+                            <span class="input-group-btn">
+                                <?php
+                                if ($q <> '') {
+                                    ?>
+                                    <a href="<?php echo site_url('app/pages'); ?>" class="btn btn-sm btn-warning">Atur Ulang</a>
+                                    <?php
+                                }
+                                ?>
+                                <button class="btn btn-sm btn-red" type="submit">Cari</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+
+            <div class="table table-responsive">
+                <table class="table table-bordered table-responsive" >
+                    <tr>
+                        <th>No</th>
+                        <th>Thumbnail</th>
+                        <th>Judul</th>
+                        <th>Alias URL</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr><?php
+                    foreach ($pages_data as $pages) {
+                        ?>
+                        <tr>
+                            <td width="80px"><?php echo ++$start ?></td>
+                            <td>
+                                <a class="image-popup-vertical-fit" href="<?php echo site_url($pages->postimage) ?>" title="<?php echo $pages->title ?>">
+
+                                    <img src="<?php echo site_url($pages->postimagethumb) ?>" class="img img-thumbnail d-block mo-mb-2" style="max-height: 150px;width: auto;" alt=""/>
+                                </a>
+                            </td>
+                            <td><?php echo $pages->title ?></td>
+                            <td><?php echo $pages->slug ?></td>
+                            <td><?php echo $status[$pages->poststatus] ?></td>
+                            <td style="text-align:center" width="250px">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-teal dropdown-toggle" data-toggle="dropdown">Pilih Aksi <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <?php
+                                        if (in_array('update', $rolelist)) {
+                                            echo "<li>" . $this->myacl->_btnUpdate(site_url('app/pages/update/' . $pages->id)) . "</li>";
+                                        }
+
+                                        if (in_array('delete', $rolelist)) {
+                                            echo "<li>" . $this->myacl->_btnDelete(site_url('app/pages/delete/' . $pages->id)) . "</li>";
+                                        }
+                                        ?>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+
+                </table>
+            </div>
+
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <a href="#" class="btn btn-primary">Jumlah Data : <?php echo $total_rows ?></a>
+                </div>
+                <div class="col-md-6 col-sm-12 text-right">
+                    <?php echo $pagination ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
